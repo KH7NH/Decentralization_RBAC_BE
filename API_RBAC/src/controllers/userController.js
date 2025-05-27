@@ -6,12 +6,12 @@ import { JwtProvider,
   ACCESS_TOKEN_SECRET_SIGNATURE 
 } from '~/providers/JwtProvider'
 import { MOCK_USER_LEVEL_1 } from '~/models/mock_Database-Level-1.js'
-
+import { MOCK_USER_LEVEL_2 } from '~/models/mock_Database-Level-2.js'
 
 
 const login = async (req, res) => {
   try {
-    if (req.body.email !== MOCK_USER_LEVEL_1.EMAIL || req.body.password !== MOCK_USER_LEVEL_1.PASSWORD) {
+    if (req.body.email !== MOCK_USER_LEVEL_2.EMAIL || req.body.password !== MOCK_USER_LEVEL_2.PASSWORD) {
       res.status(StatusCodes.FORBIDDEN).json({ message: 'Your email or password is incorrect!' })
       return
     }
@@ -19,9 +19,10 @@ const login = async (req, res) => {
     // Trường hợp nhập đúng thông tin tài khoản, tạo token và trả về cho phía Client
     // Tạo thông tin payload đính kèm trong JWT : bao gồm id, email của user
     const userInfo = {
-      id: MOCK_USER_LEVEL_1.ID,
-      email: MOCK_USER_LEVEL_1.EMAIL,
-      role: MOCK_USER_LEVEL_1.ROLE
+      id: MOCK_USER_LEVEL_2.ID,
+      email: MOCK_USER_LEVEL_2.EMAIL,
+      // role: MOCK_USER_LEVEL_1.ROLE
+      role: MOCK_USER_LEVEL_2.ROLE
     }
 
     // Tạo ra hai loại token, accessToken và refreshToken để trả về phía FE

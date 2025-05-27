@@ -21,6 +21,7 @@ const isValidPermission = (allowedRoles) => async (req, res, next) => {
             })
             return
         }
+
     // Bước 4: Nếu như role hợp lệ thì cho phép request đi tiếp (sang controller)
     next()
     } catch (error) {

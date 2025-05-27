@@ -3,8 +3,9 @@ import express from 'express'
 import { dashboardController } from '~/controllers/dashboardController'
 import { authMiddleware } from '~/middlewares/authMiddleware'
 import { StatusCodes } from 'http-status-codes'
-import { rbacMiddleware_Level_1 } from '~/middlewares/rbacMiddleware-Level-1.js'
 import { MOCK_ROLES_LEVEL_1 } from '~/models/mock_Database-Level-1'
+import { rbacMiddleware_Level_1 } from '~/middlewares/rbacMiddleware-Level-1'
+import { rbacMiddleware_Level_2 } from '~/middlewares/rbacMiddleware-Level-2'
 
 const Router = express.Router()
 
@@ -14,7 +15,8 @@ Router.route('/access')
 Router.route('/messages')
   .get(
     authMiddleware.isAuthorized,
-    rbacMiddleware_Level_1.isValidPermission([MOCK_ROLES_LEVEL_1.ADMIN, MOCK_ROLES_LEVEL_1.MODERATOR]),
+    // rbacMiddleware_Level_1.isValidPermission([MOCK_ROLES_LEVEL_1.ADMIN, MOCK_ROLES_LEVEL_1.MODERATOR]),
+    rbacMiddleware_Level_2.isValidPermission(['read_messages']), // read ứng với API GET
     (req, res) => {
       res.status(StatusCodes.OK).json({ message: 'Messages API' })
     }
@@ -23,7 +25,8 @@ Router.route('/messages')
 Router.route('/admin-tools')
   .get(
     authMiddleware.isAuthorized,
-    rbacMiddleware_Level_1.isValidPermission([MOCK_ROLES_LEVEL_1.ADMIN]),
+    // rbacMiddleware_Level_1.isValidPermission([MOCK_ROLES_LEVEL_1.ADMIN]),
+    rbacMiddleware_Level_2.isValidPermission(['read_admin_tools']), // read ứng với API GET
     (req, res) => {
       res.status(StatusCodes.OK).json({ message: 'admin-tools API' })
     }
