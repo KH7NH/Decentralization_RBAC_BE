@@ -49,7 +49,7 @@ function App() {
           <Route path='/support/update' element={<Dashboard />} />
           <Route path='/support/delete' element={<Dashboard />} /> */} //
         </Route>
-        <Route element={<RbacRoute requiredPermission={permissions.VIEW_MESSAGES} />}>
+        <Route element={<RbacRoute requiredPermission={permissions.VIEW_MESSAGE} />}>
           <Route path='/messages' element={<Dashboard />} />
         </Route>
         <Route element={<RbacRoute requiredPermission={permissions.VIEW_REVENUE} />}>
